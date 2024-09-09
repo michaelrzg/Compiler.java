@@ -6,10 +6,11 @@
 // File: Driver
 
 //this is the driver for the Lexical Analyzer of a simple calculator
-import java.util.Scanner;
 import java.io.File;
+import java.util.Scanner;
 
 class driver {
+
     public static void main(String[] args) {
         // make user pass sorce code as argument txt file path
         try {
