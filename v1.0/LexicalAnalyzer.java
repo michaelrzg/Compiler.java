@@ -16,16 +16,16 @@ public class LexicalAnalyzer {
     // constructor (no default bc src string is required)
     public LexicalAnalyzer(String src) {
         this.src = src;
-        pointerX = 0;
-        pointerY = 0;
+        pointerX = 1;
+        pointerY = 1;
     }
 
     // main function of this object
     // returns next token in string as Token object
     public Token getToken() throws InvalidTokenException {
 
-        // check if next input is valid.
-        if (pointerX > src.length() - 1) {
+        // check if next input is valid or EOS
+        if (pointerX >= src.length()) {
             return new Token('$', Types.EOS, pointerX++, pointerY++);
         }
         // move pointer to next non-white space
@@ -37,23 +37,24 @@ public class LexicalAnalyzer {
         // char,type from types enum (see Types.java), row, and column
         switch (src.charAt(pointerX)) {
             case '+':
-                return new Token(src.charAt(pointerX), Types.ADDITION, pointerX++, pointerY++);
+                return new Token(src.charAt(pointerX), Types.ADDITION, pointerX++, pointerY);
             case '-':
-                return new Token(src.charAt(pointerX), Types.SUBTRACTION, pointerX++, pointerY++);
+                return new Token(src.charAt(pointerX), Types.SUBTRACTION, pointerX++, pointerY);
             case '*':
-                return new Token(src.charAt(pointerX), Types.MULTIPLICATION, pointerX++, pointerY++);
+                return new Token(src.charAt(pointerX), Types.MULTIPLICATION, pointerX++, pointerY);
             case '/':
-                return new Token(src.charAt(pointerX), Types.DIVISION, pointerX++, pointerY++);
+                return new Token(src.charAt(pointerX), Types.DIVISION, pointerX++, pointerY);
             case '(':
-                return new Token(src.charAt(pointerX), Types.LPAREN, pointerX++, pointerY++);
+                return new Token(src.charAt(pointerX), Types.LPAREN, pointerX++, pointerY);
             case ')':
-                return new Token(src.charAt(pointerX), Types.RPAREN, pointerX++, pointerY++);
+                return new Token(src.charAt(pointerX), Types.RPAREN, pointerX++, pointerY);
+            
 
         }
         // if its not one of the symbols above AND it is an ascii integer literal,
         // repeat above creation and pass it the int as a char
         if (src.charAt(pointerX) > 47 && src.charAt(pointerX) < 58) {
-            return new Token(src.charAt(pointerX), Types.INTLIT, pointerX++, pointerY++);
+            return new Token(src.charAt(pointerX), Types.INTLIT, pointerX++, pointerY);
         } // if none of these cases, throw exception and track row and column.
         else
             throw new InvalidTokenException(pointerX, pointerY);

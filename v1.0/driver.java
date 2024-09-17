@@ -17,24 +17,27 @@ class driver {
             if (args.length == 0) {
                 throw new InvalidSourceCode();
             }
-        } catch (Exception e) {
+        } catch (InvalidSourceCode e) {
             e.printStackTrace();
             return;
         }
-
+        //create string
         String src = "";
+        //parse file and add all characters to string
         try {
             File f = new File(args[0]);
             Scanner sc = new Scanner(f);
-            src = sc.nextLine();
+            src += sc.nextLine();
             sc.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
         System.out.println(src);
-
+        // pass string to Lexical Analyzer object
         LexicalAnalyzer l = new LexicalAnalyzer(src);
+        // pointer
         Token current = new Token();
+
         while (current.getType() != Types.EOS) {
             try {
                 current = l.getToken();
@@ -45,6 +48,7 @@ class driver {
             if (current.getType() != Types.EOS) {
                 System.out.println(current);
             }
+            else System.out.println("EOS Token");
 
         }
     }

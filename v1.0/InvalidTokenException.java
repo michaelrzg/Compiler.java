@@ -8,7 +8,7 @@
 // Exception thrown when an invalid token is given in the src. Returns row and column of invalid token
 public class InvalidTokenException extends Exception {
     InvalidTokenException(int x, int y) {
-        super("INVALID TOKEN AT LINE " + x + " COLUMN " + y);
+        super("INVALID TOKEN AT LINE " + y + " COLUMN " + x);
 
     }
 }
