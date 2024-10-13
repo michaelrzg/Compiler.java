@@ -48,6 +48,8 @@ public class LexicalAnalyzer {
                 return new Token(src.charAt(pointerX), Types.LPAREN, pointerX++, pointerY);
             case ')':
                 return new Token(src.charAt(pointerX), Types.RPAREN, pointerX++, pointerY);
+            default:
+                System.out.println("Invalid Token at Line" + pointerY + " Column " + pointerX);
             
 
         }
