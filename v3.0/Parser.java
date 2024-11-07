@@ -138,8 +138,8 @@ class Parser {
     * Number function that determines which set case its RHS contains and follows the expected path (either intlit or null).
     */
     private void number() throws InvalidTokenException{
-        if(tokens.element().getType() == Types.INTLITLIT){
-        match(tokens.element(), Types.INTLITLIT);
+        if(tokens.element().getType() == Types.INTLIT){
+        match(tokens.element(), Types.INTLIT);
         }
     }
      /**
