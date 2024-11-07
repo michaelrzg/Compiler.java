@@ -1,0 +1,3 @@
+class ParenFactorNode implements FactorNode{
+    
+}

@@ -1,0 +1,3 @@
+class UnaryExpressionNode implements ExpressionNode{
+    
+}

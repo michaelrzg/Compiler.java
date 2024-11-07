@@ -1,0 +1,3 @@
+class UnaryTermNode implements TermNode{
+    
+}

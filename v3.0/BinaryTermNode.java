@@ -1,0 +1,3 @@
+class BinaryTermNode implements TermNode{
+    
+}

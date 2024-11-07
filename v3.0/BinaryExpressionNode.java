@@ -1,0 +1,3 @@
+class BinaryExpressionNode implements ExpressionNode{
+    
+}
