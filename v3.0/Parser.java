@@ -6,7 +6,7 @@
 // File: Parser
 import java.util.Queue;
 import java.util.Stack;
-class Parser {
+final class Parser {
 
     // Queue to hold tokens
     private final Queue<Token> tokens;
@@ -76,18 +76,24 @@ class Parser {
     }
 
     private Node expression_prime(Node expr) throws Exception {
-        if (tokens.element().getType() == Types.ADDITION) {
-            match(tokens.element(), Types.ADDITION);
-            Node termNode = term();
-            Node expr1 = new BinaryExpressionNode(expr, Types.ADDITION, termNode);
-            return expression_prime(expr1);
-        } else if (tokens.element().getType() == Types.SUBTRACTION) {
-            match(tokens.element(), Types.SUBTRACTION);
-            Node termNode = term();
-            Node expr1 = new BinaryExpressionNode(expr, Types.SUBTRACTION, termNode);
-            return expression_prime(expr1);
-        } else {
+        if (null == tokens.element().getType()) {
             return expr;
+        } else switch (tokens.element().getType()) {
+            case ADDITION -> {
+                match(tokens.element(), Types.ADDITION);
+                Node termNode = term();
+                Node expr1 = new BinaryExpressionNode(expr, Types.ADDITION, termNode);
+                return expression_prime(expr1);
+            }
+            case SUBTRACTION -> {
+                match(tokens.element(), Types.SUBTRACTION);
+                Node termNode = term();
+                Node expr1 = new BinaryExpressionNode(expr, Types.SUBTRACTION, termNode);
+                return expression_prime(expr1);
+            }
+            default -> {
+                return expr;
+            }
         }
     }
 
@@ -97,37 +103,48 @@ class Parser {
     }
 
     private Node term_prime(Node term) throws Exception {
-        if (tokens.element().getType() == Types.MULTIPLICATION) {
-            match(tokens.element(), Types.MULTIPLICATION);
-            Node factorNode = factor();
-            Node term1 = new BinaryExpressionNode(term, Types.MULTIPLICATION, factorNode);
-            return term_prime(term1);
-        } else if (tokens.element().getType() == Types.DIVISION) {
-            match(tokens.element(), Types.DIVISION);
-            Node factorNode = factor();
-            Node term1 = new BinaryExpressionNode(term, Types.DIVISION, factorNode);
-            return term_prime(term1);
-        } else {
+        if (null == tokens.element().getType()) {
             return term;
+        } else switch (tokens.element().getType()) {
+            case MULTIPLICATION -> {
+                match(tokens.element(), Types.MULTIPLICATION);
+                Node factorNode = factor();
+                Node term1 = new BinaryExpressionNode(term, Types.MULTIPLICATION, factorNode);
+                return term_prime(term1);
+            }
+            case DIVISION -> {
+                match(tokens.element(), Types.DIVISION);
+                Node factorNode = factor();
+                Node term1 = new BinaryExpressionNode(term, Types.DIVISION, factorNode);
+                return term_prime(term1);
+            }
+            default -> {
+                return term;
+            }
         }
     }
 
     private Node factor() throws Exception {
-        if (tokens.element().getType() == Types.LPAREN) {
-            match(tokens.element(), Types.LPAREN);
-            Node expr = expression();
-            match(tokens.element(), Types.RPAREN);
-            return expr;
-        } else if (tokens.element().getType() == Types.SUBTRACTION) {
-            match(tokens.element(), Types.SUBTRACTION);
-            Node expr = expression();
-            return new UnaryExpressionNode(Types.SUBTRACTION, expr);
-        } else if (tokens.element().getType() == Types.INTLIT) {
-            int value = Integer.parseInt(tokens.element().getLexeme()+""); // Assuming token has getValue() for int literals
-            match(tokens.element(), Types.INTLIT);
-            return new NumberNode(value);
-        } else {
+        if (null == tokens.element().getType()) {
             throw new Exception("Syntax error: Unexpected token " + tokens.element().getType());
+        } else switch (tokens.element().getType()) {
+            case LPAREN -> {
+                match(tokens.element(), Types.LPAREN);
+                Node expr = expression();
+                match(tokens.element(), Types.RPAREN);
+                return expr;
+            }
+            case SUBTRACTION -> {
+                match(tokens.element(), Types.SUBTRACTION);
+                Node expr = expression();
+                return new UnaryExpressionNode(Types.SUBTRACTION, expr);
+            }
+            case INTLIT -> {
+                int value = Integer.parseInt(tokens.element().getLexeme()+""); // Assuming token has getValue() for int literals
+                match(tokens.element(), Types.INTLIT);
+                return new NumberNode(value);
+            }
+            default -> throw new Exception("Syntax error: Unexpected token " + tokens.element().getType());
         }
     }
 }
