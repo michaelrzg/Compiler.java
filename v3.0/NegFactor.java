@@ -1,3 +1,0 @@
-class NegFactor implements FactorNode{
-    
-}

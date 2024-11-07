@@ -1,3 +1,0 @@
-class NumNode implements FactorNode{
-    
-}
