@@ -63,7 +63,7 @@ class ParseTree {
                 default -> throw new Exception("Unsupported binary operator: " + binaryNode.operator);
             };
         } else {
-            throw new Exception("Unsupported node type: " + node.getClass().getName());
+            throw new Exception("Unsupported node type");
         }
     }
 }
