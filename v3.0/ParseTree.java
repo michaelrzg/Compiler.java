@@ -21,7 +21,7 @@ class ParseTree {
      * @throws Exception If there is an issue during evaluation.
      */
     public int evaluate() throws Exception {
-        return evaluateNode(root);
+        return evaluate(root);
     }
 
     /**
@@ -31,12 +31,12 @@ class ParseTree {
      * @return The evaluated integer value of the node.
      * @throws Exception If an unsupported node type is encountered.
      */
-    private int evaluateNode(Node node) throws Exception {
+    private int evaluate(Node node) throws Exception {
         if (node instanceof NumberNode numberNode) {
             return numberNode.value;
         } else if (node instanceof UnaryExpressionNode unaryExpressionNode) {
             UnaryExpressionNode unaryNode = unaryExpressionNode;
-            int operandValue = evaluateNode(unaryNode.operand);
+            int operandValue = evaluate(unaryNode.operand);
 
             // Handle unary operations (only subtraction in this case)
             if (unaryNode.operator == Types.SUBTRACTION) {
@@ -45,8 +45,8 @@ class ParseTree {
                 throw new Exception("Unsupported unary operator: " + unaryNode.operator);
             }
         } else if (node instanceof BinaryExpressionNode binaryNode) {
-            int leftValue = evaluateNode(binaryNode.left);
-            int rightValue = evaluateNode(binaryNode.right);
+            int leftValue = evaluate(binaryNode.left);
+            int rightValue = evaluate(binaryNode.right);
 
             // Handle binary operations: addition, subtraction, multiplication, division
             return switch (binaryNode.operator) {
