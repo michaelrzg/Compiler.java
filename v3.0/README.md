@@ -2,7 +2,7 @@
 
 ## Evaluating Valid Expressions
 
-- Added parse tree takes root as argument and recursivly (LRV) parses through the tree and evaluates the expression.
+- Added parse tree that takes root as argument and recursivly (LRV) parses through the tree and evaluates the expression.
 - Returns numerical value of input equation
 
 ## Updated Parser
