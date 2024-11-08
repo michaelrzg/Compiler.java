@@ -140,7 +140,7 @@ final class Parser {
                 return new UnaryExpressionNode(Types.SUBTRACTION, expr);
             }
             case INTLIT -> {
-                int value = Integer.parseInt(tokens.element().getLexeme()+""); // Assuming token has getValue() for int literals
+                int value = Integer.parseInt(tokens.element().getLexeme()+""); 
                 match(tokens.element(), Types.INTLIT);
                 return new NumberNode(value);
             }
