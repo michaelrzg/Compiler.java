@@ -1,0 +1,6 @@
+(43)+(3+93)/3+8*7 
+x= 6+8
+display x 
+input y 
+display y
+
