@@ -134,8 +134,8 @@ final class Parser {
             memory.save(idToken.getLexeme(), String.valueOf(value));
             System.out.println("Assigned " + value + " to variable " + idToken.getLexeme());
         } else {
-            // If no `=`, declare the variable with a default value (e.g., "null")
-            memory.save(idToken.getLexeme(), null);
+            // If no `=`, declare the variable with a default value of 0
+            memory.save(idToken.getLexeme(), "0");
             System.out.println("Declared variable " + idToken.getLexeme() + " with no initial value.");
         }
     }
